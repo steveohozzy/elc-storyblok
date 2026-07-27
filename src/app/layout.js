@@ -1,4 +1,4 @@
-import { Geist, Nunito } from "next/font/google";
+import { Geist, Comfortaa } from "next/font/google";
 import "./globals.css";
 
 import Header from "@/components/Header";
@@ -10,8 +10,8 @@ const geistSans = Geist({
   subsets: ["latin"],
 });
 
-const nunito = Nunito({
-  variable: "--font-nunito",
+const confortaa = Comfortaa({
+  variable: "--font-comfortaa",
   subsets: ["latin"],
   display: "swap",
 });
@@ -27,7 +27,7 @@ export default async function RootLayout({ children }) {
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${nunito.variable}`}
+      className={`${geistSans.variable} ${comfortaa.variable}`}
     >
       <body className="min-h-screen flex flex-col">
         <Header menuItems={menuItems} />
