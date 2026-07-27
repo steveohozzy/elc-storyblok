@@ -1,9 +1,9 @@
 @import "tailwindcss";
 
 @theme inline {
-  --font-heading: var(--font-fraunces), Georgia, serif;
+  --font-heading: var(--font-varela), Georgia, serif;
   --font-sans: var(--font-geist-sans), 'Geist Fallback';
-  --font-serif: var(--font-fraunces), Georgia, serif;
+  --font-serif: var(--font-varela), Georgia, serif;
   --font-mono: var(--font-geist-mono), 'Geist Mono Fallback';
   --color-chart-4: var(--chart-4);
   --color-input: var(--input);
