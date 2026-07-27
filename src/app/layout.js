@@ -10,7 +10,7 @@ const geistSans = Geist({
   subsets: ["latin"],
 });
 
-const confortaa = Comfortaa({
+const comfortaa = Comfortaa({
   variable: "--font-comfortaa",
   subsets: ["latin"],
   display: "swap",
