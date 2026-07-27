@@ -1,9 +1,7 @@
 @import "tailwindcss";
 
 @theme inline {
-  --font-heading: var(--font-comfortaa), Georgia, serif;
-  --font-sans: var(--font-comfortaa), 'Comfortaa Fallback';
-  --font-serif: var(--font-comfortaa), Georgia, serif;
+  --font-serif: var(--font-nunito), Georgia, serif;
   --font-mono: var(--font-geist-mono), 'Geist Mono Fallback';
   --color-chart-4: var(--chart-4);
   --color-input: var(--input);
@@ -43,10 +41,6 @@
   --border: oklch(0.88 0.02 80);
   --input: oklch(0.88 0.02 80);
   --chart-4: oklch(0.65 0.15 150);
-}
-
-body {
-  font-weight: 500;
 }
 
 @keyframes marquee {
