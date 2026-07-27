@@ -1,7 +1,9 @@
 @import "tailwindcss";
 
 @theme inline {
-  --font-serif: var(--font-nunito), Georgia, serif;
+  --font-sans: var(--font-nunito), sans-serif;
+  --font-heading: var(--font-nunito), sans-serif;
+  --font-serif: var(--font-nunito), serif;
   --font-mono: var(--font-geist-mono), 'Geist Mono Fallback';
   --color-chart-4: var(--chart-4);
   --color-input: var(--input);
