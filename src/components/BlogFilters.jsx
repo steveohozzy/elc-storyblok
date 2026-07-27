@@ -9,11 +9,16 @@ import Image from "next/image";
 export default function BlogFilters({ posts }) {
   const searchParams = useSearchParams();
   const filterRef = useRef(null);
+  const postsRef = useRef(null);
 
   // initial state from URL only once
   const [selected, setSelected] = useState(
     () => searchParams.get("category") || "All"
   );
+
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const POSTS_PER_PAGE = 12;
 
   // scroll only
   useEffect(() => {
@@ -52,6 +57,26 @@ export default function BlogFilters({ posts }) {
             )
         );
 
+  const totalPages = Math.ceil(
+    filtered.length / POSTS_PER_PAGE
+  );
+
+  const paginatedPosts = filtered.slice(
+    (currentPage - 1) * POSTS_PER_PAGE,
+    currentPage * POSTS_PER_PAGE
+  );
+
+  const changePage = (page) => {
+    setCurrentPage(page);
+
+    setTimeout(() => {
+      postsRef.current?.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    }, 50);
+  };
+
   return (
     <>
       <div
@@ -61,7 +86,10 @@ export default function BlogFilters({ posts }) {
         {categories.map(category => (
           <button
             key={category}
-            onClick={() => setSelected(category)}
+            onClick={() => {
+              setSelected(category);
+              setCurrentPage(1);
+            }}
             className={`
               rounded-full
               px-4
@@ -81,8 +109,10 @@ export default function BlogFilters({ posts }) {
       </div>
 
       {/* Blog cards */}
-      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-        {filtered.map((post) => (
+      <div
+      ref={postsRef}
+      className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        {paginatedPosts.map((post) => (
           <article
             key={post.uuid}
             className="
@@ -167,6 +197,24 @@ export default function BlogFilters({ posts }) {
               </div>
             </Link>
           </article>
+        ))}
+      </div>
+      <div className="mt-10 flex justify-center gap-2">
+        {Array.from(
+          { length: totalPages },
+          (_, i) => i + 1
+        ).map(page => (
+          <button
+            key={page}
+            onClick={() => changePage(page)}
+            className={`rounded-full px-4 py-2 cursor-pointer transition-all ${
+              currentPage === page
+                ? "bg-primary text-white"
+                : "border"
+            }`}
+          >
+            {page}
+          </button>
         ))}
       </div>
     </>

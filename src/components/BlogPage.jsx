@@ -5,16 +5,25 @@ import BlogFilters from "./BlogFilters";
 export default async function BlogPage({ blok }) {
   const storyblokApi = getStoryblokApi();
 
-  const { data } = await storyblokApi.get(
-    "cdn/stories",
-    {
+  let posts = [];
+  let page = 1;
+  let total = 0;
+
+  do {
+    const { data } = await storyblokApi.get("cdn/stories", {
       starts_with: "blog/",
       content_type: "blogPost",
       version: "draft",
-    }
-  );
+      per_page: 100,
+      page,
+    });
 
-  const posts = data.stories;
+    posts = [...posts, ...data.stories];
+
+    total = data.total;
+    page++;
+
+  } while (posts.length < total);
 
   return (
     <>

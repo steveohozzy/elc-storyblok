@@ -4,24 +4,25 @@ export async function getNavigation() {
   const storyblokApi = getStoryblokApi();
 
   const { data } = await storyblokApi.get("cdn/links", {
-    version: "draft",
+    version: "published",
   });
 
-  return Object.values(data.links)
-    .filter((link) => {
-      const slug = link.slug;
+const allLinks = Object.values(data.links);
 
-      if (!slug) return false;
+  const filteredLinks = allLinks.filter((link) => {
+    const slug = link.slug;
 
-      if (slug === "home") return false;
+    if (!slug) return false;
 
-      if (slug.startsWith("globals")) return false;
+    if (slug === "home") return false;
 
-      if (slug.startsWith("footer")) return false;
+    if (slug.startsWith("globals")) return false;
 
-      return true;
-    })
-    .filter((link) => {
-      return !link.slug.includes("/") || link.slug.split("/").length === 1;
-    });
+    if (slug.startsWith("footer")) return false;
+
+    if (slug.startsWith("blog/")) return false;
+
+    return true;
+  });
+  return filteredLinks;
 }
